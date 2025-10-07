@@ -1,0 +1,92 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ProyectoMultiplataforma.ViewModels"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ProyectoMultiplataforma.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext 
+         property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Dialogos -->
+        <dialogHostAvalonia:DialogHost Identifier="registro"
+                                       CloseOnClickAway="True">
+            <dialogHostAvalonia:DialogHost.Content/>
+        </dialogHostAvalonia:DialogHost>
+        
+        <!-- Contenido izq-->
+        <StackPanel Grid.Column="0">
+            <StackPanel.Background>
+                <ImageBrush Source="avares://ProyectoMultiplataforma/Assets/fondo.jpg"
+                            Stretch="UniformToFill"/>
+            </StackPanel.Background>
+            <Image Source="avares://ProyectoMultiplataforma/Assets/logo.png"
+                   Width="150" Margin="30"/>
+            <TextBlock Text="IES ALONSO"
+                       FontSize="50" HorizontalAlignment="Center"
+                       />
+            <TextBlock Text="DE ERCILLA"
+                       FontSize="50" HorizontalAlignment="Center"/>
+            <TextBlock Text="DESARROLLO"
+                       FontSize="35" Margin="0,30,0,0"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="MULTIPLATAFORMA"
+                       FontSize="35"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+        
+        <!-- Contenido derecha -->
+        <StackPanel Width="200" Grid.Column="1">
+            <TextBlock Text="LOGIN" HorizontalAlignment="Center"
+                       Margin="0,70,0,15"
+                       FontSize="45"
+                       Foreground="BlueViolet"/>
+            <TextBox UseFloatingWatermark="True" Watermark="Ej MiguelB45..." 
+                     p1:TextFieldAssist.Label="              Usuario/Correo" Width="200"
+                     Foreground="BlueViolet">
+                    <TextBox.InnerLeftContent>
+                        <avalonia:MaterialIcon Kind="AccountCircle" Height="30"
+                                               Foreground="Aqua"
+                                               Margin="0,0,10,0"/>
+                    </TextBox.InnerLeftContent>
+            </TextBox>
+            <TextBox UseFloatingWatermark="True" Watermark=" Ej ADMIN12345*..." 
+                     p1:TextFieldAssist.Label="                 Contraseña" Width="200"
+                     Foreground="BlueViolet" Margin="0,15,0,15">
+                <TextBox.InnerLeftContent>
+                    <avalonia:MaterialIcon Kind="Key" Height="20"
+                                           Foreground="Aqua"
+                                           Margin="0,0,10,0"/>
+                </TextBox.InnerLeftContent>
+            </TextBox>
+            <HyperlinkButton Content="¿No tienes cuenta? Creala" Margin="0,10,0,5"
+                             Command="{Binding OpenRegistroCommand}"
+                             Grid.ColumnSpan="2" ZIndex="1"
+                             Theme="{StaticResource MaterialHyperLinkButton}"
+                             HorizontalAlignment="Center"/>
+            <HyperlinkButton Content="¿Te olvidastes la contraseña?" Margin="0,5,0,5"
+                             Command="{Binding OpenRegistroCommand}"
+                             Grid.ColumnSpan="2" ZIndex="1"
+                             Theme="{StaticResource MaterialHyperLinkButton}"
+                             HorizontalAlignment="Center"/>
+            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                    Classes="light" Content="Aceptar" 
+                    ToolTip.Tip="Button with classes &quot;Light&quot; and &quot;Outline&quot;"
+                    Margin="0,15,0,15"
+                    FontSize="17"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
