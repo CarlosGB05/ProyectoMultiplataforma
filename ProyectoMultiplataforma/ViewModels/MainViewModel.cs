@@ -10,8 +10,10 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _greeting = "Welcome to Avalonia!";
 
     [RelayCommand]
-    private void OpenRegistro()
+    public void OpenRegistro()
     {
-        DialogHost.Show(new registro(),"registro");
+        registro registro = new registro();
+        registro.DataContext = new RegistroViewModel();
+        DialogHost.Show(registro,"registro");
     }
 }

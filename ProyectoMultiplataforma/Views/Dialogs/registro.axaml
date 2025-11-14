@@ -2,10 +2,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:ProyectoMultiplataforma.ViewModels"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="550"
              x:Class="ProyectoMultiplataforma.Views.Dialogs.registro"
-             Width="200" Height="300">
-    <StackPanel Width="200" Height="200">
-        <TextBlock Text="Hola"/>
-    </StackPanel>
+             Width="500" Height="600"
+             x:DataType="vm:RegistroViewModel">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext 
+         property in code (look at App.axaml.cs) -->
+        <vm:RegistroViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Registro" HorizontalAlignment="Center"
+                       FontSize="40" Foreground="Aqua"
+                       Margin="10,15,10,10"/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Nombre" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Usuario.Nombre}" Width="240"
+                     Watermark="Escribe tu nombre..."/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Correo" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Usuario.Correo}" Width="240"
+                     Watermark="Escribe tu correo..."/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Contraseña" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Usuario.Contrasena}" Width="240"
+                     Watermark="Escribe tu contraseña..."/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Verificar Contraseña" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Usuario.VerificarContrasena}" Width="240"
+                     Watermark="Verifica tu contraseña..."/>
+            
+            <DatePicker Name="DatePicker2" 
+                        SelectedDate="{Binding Usuario.FechaNacimiento}" 
+                        p1:DatePickerAssist.DateTimeFormat="dd MMM, yyyy"
+                        Width="240"/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Teléfono" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Usuario.Telefono}" Width="240"
+                     Watermark="Escribe tu teléfono..."/>
+            
+            <ToggleSwitch Content="Aceptar Condiciones" 
+                          IsChecked="{Binding Usuario.Condiciones}"
+                          HorizontalAlignment="Center" Margin="10"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Crear Usuario" Width="120" Margin="10"
+                        Command="{Binding CreateUserCommand}"/>
+            
+                <Button Content="Cancelar" Width="120" Margin="10"
+                        Command="{Binding CloseRegistroCommand}"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
 </UserControl>
